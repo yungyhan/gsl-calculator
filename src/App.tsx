@@ -1,23 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import Button from "react-bootstrap/Button";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-function App() {
+function App(): React.ReactElement {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+        <p>You're a peer, looking around.</p>
+        <Button
+          onClick={() => {
+            window.open(
+              "https://www.youtube.com/channel/UCK5eBtuoj_HkdXKHNmBLAXg",
+              "_blank"
+            );
+          }}
+          variant="secondary"
         >
-          Learn React
-        </a>
+          Watch GSL here
+        </Button>
       </header>
     </div>
   );
