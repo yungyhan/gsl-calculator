@@ -16,6 +16,7 @@
     "eslint": "^8.16.0",
     "formik": "^2.2.9",
     "gh-pages": "^4.0.0",
+    "jest": "^28.1.0",
     "react": "^18.1.0",
     "react-bootstrap": "^2.4.0",
     "react-dom": "^18.1.0",
@@ -30,7 +31,7 @@
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "yarn jest",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -50,5 +51,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.2",
+    "@babel/preset-env": "^7.18.2",
+    "@babel/preset-typescript": "^7.17.12",
+    "babel-jest": "^28.1.0"
   }
 }

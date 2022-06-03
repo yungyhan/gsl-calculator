@@ -3,8 +3,9 @@ import { Score } from "../whoIsGoingToNextRound/types";
 export function getScore(
   playerId: string,
   matchWins: number,
+  matchLosses: number,
   mapWins: number,
   mapLosses: number
 ): Score {
-  return { playerId, matchWins, mapWins, mapLosses };
+  return { playerId, matchWins, matchLosses, mapWins, mapLosses };
 }

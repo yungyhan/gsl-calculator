@@ -1,6 +1,7 @@
 export type Score = {
   playerId: string;
   matchWins: number;
+  matchLosses: number;
   mapWins: number;
   mapLosses: number;
 };

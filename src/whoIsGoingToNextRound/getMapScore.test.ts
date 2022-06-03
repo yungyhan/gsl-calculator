@@ -5,6 +5,7 @@ describe("getMapScore function", () => {
     const result = getMapScore({
       playerId: "1",
       matchWins: 2,
+      matchLosses: 3,
       mapWins: 8,
       mapLosses: 3,
     });
