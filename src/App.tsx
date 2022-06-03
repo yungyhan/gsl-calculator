@@ -1,13 +1,14 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { MatchTable } from "./MatchTable";
 
 function App(): React.ReactElement {
   return (
     <div className="App">
       <header className="App-header">
+        <MatchTable />
         <p>You're a peer, looking around.</p>
         <Button
           onClick={() => {
