@@ -11,3 +11,7 @@ export type Matchup = {
   player1Id: string;
   player2Id: string;
 };
+
+export type MatchupResult = Record<string, Match>;
+
+export type Match = Record<string, number>;

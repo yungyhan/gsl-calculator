@@ -18,8 +18,6 @@ export function whoIsNotGoingToNextRound(scores: Score[]): string[] {
   const numberOfNonAdvancingPlayers =
     getNumberOfConfirmedNonAdvancingPlayers(sortedScores);
 
-  console.log(numberOfNonAdvancingPlayers);
-
   if (numberOfNonAdvancingPlayers === 0) {
     return [];
   }
@@ -28,12 +26,12 @@ export function whoIsNotGoingToNextRound(scores: Score[]): string[] {
   return advancingScores.map((score) => score.playerId);
 }
 
-function getSortedScores(scores: Score[]): Score[] {
+export function getSortedScores(scores: Score[]): Score[] {
   return scores.sort((a, b) => {
-    if (a.matchWins === b.matchWins) {
+    if (a.matchWins === b.matchWins && a.matchLosses === b.matchLosses) {
       return getMapScore(b) - getMapScore(a);
     }
-    return b.matchWins - a.matchWins;
+    return b.matchWins - b.matchLosses - (a.matchWins - a.matchLosses);
   });
 }
 
@@ -59,7 +57,7 @@ function getNumberOfConfirmedNonAdvancingPlayers(
   const numberOfAdvancingPlayers =
     getNumberOfConfirmedAdvancingPlayers(sortedScores);
   const undecidedSpots = MAX_NO_ADVANCING_PLAYERS - numberOfAdvancingPlayers;
-  
+
   if (undecidedSpots === 0) {
     return sortedScores.length - numberOfAdvancingPlayers;
   }
@@ -68,8 +66,13 @@ function getNumberOfConfirmedNonAdvancingPlayers(
     return 0;
   }
 
-  for (var i = 0; i < MAX_NO_ADVANCING_PLAYERS; i++) {
-    if (sameScore(sortedScores[i], sortedScores[sortedScores.length - 1])) {
+  for (var i = 0; i < sortedScores.length; i++) {
+    if (
+      sameScore(
+        sortedScores[numberOfAdvancingPlayers],
+        sortedScores[sortedScores.length - 1 - i]
+      )
+    ) {
       return i;
     }
   }

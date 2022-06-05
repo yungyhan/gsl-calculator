@@ -1,21 +1,25 @@
-import React, { useEffect, useMemo } from "react";
-import Table from "react-bootstrap/Table";
+import React from "react";
 import { Formik } from "formik";
 import styled from "styled-components";
 import { FlexBox } from "../UI/FlexBox";
 import { getFormObject, getMatchups } from "../utils";
 import { playerIds } from "../constants";
+import { matchupResultToScores } from "../utils/matchupResultToScores";
+import { whoIsGoingToNextRound } from "../whoIsGoingToNextRound/whoIsGoingToNextRound";
 
 const matchups = getMatchups(playerIds);
 const formValues = getFormObject(matchups);
 
 export function MatchTable(): React.ReactElement {
-  console.log(matchups);
   return (
     <Formik
       initialValues={formValues}
       onSubmit={(values, { setSubmitting }) => {
-        alert(JSON.stringify(values, null, 2));
+        console.log(
+          whoIsGoingToNextRound(
+            matchupResultToScores({ playerIds, matchupResult: values })
+          )
+        );
         setSubmitting(false);
       }}
     >
@@ -32,17 +36,17 @@ export function MatchTable(): React.ReactElement {
         <form onSubmit={handleSubmit}>
           {matchups.map((matchup) => {
             return (
-              <FlexBox style={{ marginBottom: 32 }}>
-                <MapScoreInput>
+              <FlexBox style={{ marginBottom: 32 }} key={matchup.id}>
+                <FlexBox style={{ flexDirection: "column" }}>
                   <MatchupContainer>{`${matchup.player1Id} vs ${matchup.player2Id}`}</MatchupContainer>
                   <MatchupContainer
                     style={{ color: "grey" }}
                   >{`${matchup.player2Id} vs ${matchup.player1Id}`}</MatchupContainer>
-                </MapScoreInput>
+                </FlexBox>
                 <MapScoreInput>
                   <FlexBox>{matchup.player1Id}</FlexBox>
-
                   <input
+                    type={"number"}
                     name={`${matchup.id}.${matchup.player1Id}`}
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -51,8 +55,8 @@ export function MatchTable(): React.ReactElement {
                 </MapScoreInput>
                 <MapScoreInput>
                   <FlexBox>{matchup.player2Id}</FlexBox>
-
                   <input
+                    type={"number"}
                     name={`${matchup.id}.${matchup.player2Id}`}
                     onChange={handleChange}
                     onBlur={handleBlur}
